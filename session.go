@@ -1,6 +1,8 @@
 package gearsession
 
 import (
+	"context"
+
 	"github.com/teambition/gear"
 	"gopkg.in/session.v2"
 )
@@ -15,7 +17,7 @@ type sessionKey struct{}
 func New(opt ...session.Option) gear.Middleware {
 	globalManager = session.NewManager(opt...)
 	return func(ctx *gear.Context) error {
-		store, err := globalManager.Start(ctx.Res, ctx.Req)
+		store, err := globalManager.Start(context.Background(), ctx.Res, ctx.Req)
 		if err != nil {
 			return err
 		}
@@ -35,5 +37,5 @@ func Destroy(ctx *gear.Context) error {
 	if globalManager == nil {
 		return nil
 	}
-	return globalManager.Destroy(ctx.Res, ctx.Req)
+	return globalManager.Destroy(context.Background(), ctx.Res, ctx.Req)
 }
