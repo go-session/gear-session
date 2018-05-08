@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"reflect"
 	"testing"
 
 	"github.com/teambition/gear"
@@ -16,8 +17,6 @@ func TestSession(t *testing.T) {
 	app.Use(New(
 		session.SetCookieName(cookieName),
 		session.SetSign([]byte("sign")),
-		session.SetCookieLifeTime(60),
-		session.SetExpired(10),
 	))
 
 	app.Use(func(ctx *gear.Context) error {
@@ -25,7 +24,7 @@ func TestSession(t *testing.T) {
 
 		if ctx.Query("login") == "1" {
 			foo, ok := store.Get("foo")
-			if !ok || foo != "bar" {
+			if !ok || !reflect.DeepEqual(foo, "bar") {
 				t.Error("Not expected value:", foo)
 				return nil
 			}

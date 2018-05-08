@@ -39,3 +39,11 @@ func Destroy(ctx *gear.Context) error {
 	}
 	return globalManager.Destroy(context.Background(), ctx.Res, ctx.Req)
 }
+
+// Refresh a session and return to session storage
+func Refresh(ctx *gear.Context) (session.Store, error) {
+	if globalManager == nil {
+		return nil, nil
+	}
+	return globalManager.Refresh(context.Background(), ctx.Res, ctx.Req)
+}
