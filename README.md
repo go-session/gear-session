@@ -1,6 +1,4 @@
-# gear-session
-
-> Session middleware for Gear.
+# Session middleware for [Gear](https://github.com/teambition/gear)
 
 [![Build][Build-Status-Image]][Build-Status-Url] [![Coverage][Coverage-Image]][Coverage-Url] [![ReportCard][reportcard-image]][reportcard-url] [![GoDoc][godoc-image]][godoc-url] [![License][license-image]][license-url]
 
