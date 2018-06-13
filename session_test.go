@@ -7,8 +7,8 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/go-session/session"
 	"github.com/teambition/gear"
-	"gopkg.in/session.v2"
 )
 
 func TestSession(t *testing.T) {

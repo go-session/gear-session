@@ -4,14 +4,16 @@ import (
 	"context"
 	"sync"
 
+	"github.com/go-session/session"
 	"github.com/teambition/gear"
-	"gopkg.in/session.v2"
 )
 
-var once sync.Once
-var internalManager *session.Manager
+var (
+	once            sync.Once
+	internalManager *session.Manager
+)
 
-// Specify the context key
+// specify the context key
 type sessionKey struct{}
 
 func manager(opt ...session.Option) *session.Manager {
@@ -21,7 +23,7 @@ func manager(opt ...session.Option) *session.Manager {
 	return internalManager
 }
 
-// New Create a session middleware
+// New create a session middleware
 func New(opt ...session.Option) gear.Middleware {
 	return func(ctx *gear.Context) error {
 		store, err := manager(opt...).Start(context.Background(), ctx.Res, ctx.Req)
@@ -33,13 +35,13 @@ func New(opt ...session.Option) gear.Middleware {
 	}
 }
 
-// FromContext Get session storage from context
+// FromContext get session storage from context
 func FromContext(ctx *gear.Context) session.Store {
 	val := ctx.MustAny(sessionKey{})
 	return val.(session.Store)
 }
 
-// Destroy Destroy a session
+// Destroy a session
 func Destroy(ctx *gear.Context) error {
 	return manager().Destroy(context.Background(), ctx.Res, ctx.Req)
 }

@@ -1,6 +1,6 @@
 # Session middleware for [Gear](https://github.com/teambition/gear)
 
-[![Build][Build-Status-Image]][Build-Status-Url] [![Coverage][Coverage-Image]][Coverage-Url] [![ReportCard][reportcard-image]][reportcard-url] [![GoDoc][godoc-image]][godoc-url] [![License][license-image]][license-url]
+[![Build][Build-Status-Image]][Build-Status-Url] [![Codecov][codecov-image]][codecov-url] [![ReportCard][reportcard-image]][reportcard-url] [![GoDoc][godoc-image]][godoc-url] [![License][license-image]][license-url]
 
 ## Quick Start
 
@@ -21,16 +21,12 @@ import (
 
 	"github.com/go-session/gear-session"
 	"github.com/teambition/gear"
-	"gopkg.in/session.v2"
+	"github.com/go-session/session"
 )
 
 func main() {
 	app := gear.New()
-
-	app.Use(gearsession.New(
-		session.SetCookieName("session_id"),
-		session.SetSign([]byte("sign")),
-	))
+	app.Use(gearsession.New())
 
 	router := gear.NewRouter()
 
@@ -78,8 +74,8 @@ $ ./server
 
 [Build-Status-Url]: https://travis-ci.org/go-session/gear-session
 [Build-Status-Image]: https://travis-ci.org/go-session/gear-session.svg?branch=master
-[Coverage-Url]: https://coveralls.io/github/go-session/gear-session?branch=master
-[Coverage-Image]: https://coveralls.io/repos/github/go-session/gear-session/badge.svg?branch=master
+[codecov-url]: https://codecov.io/gh/go-session/gear-session
+[codecov-image]: https://codecov.io/gh/go-session/gear-session/branch/master/graph/badge.svg
 [reportcard-url]: https://goreportcard.com/report/github.com/go-session/gear-session
 [reportcard-image]: https://goreportcard.com/badge/github.com/go-session/gear-session
 [godoc-url]: https://godoc.org/github.com/go-session/gear-session
