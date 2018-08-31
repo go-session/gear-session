@@ -21,7 +21,6 @@ import (
 
 	"github.com/go-session/gear-session"
 	"github.com/teambition/gear"
-	"github.com/go-session/session"
 )
 
 func main() {
